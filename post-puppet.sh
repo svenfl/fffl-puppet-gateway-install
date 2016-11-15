@@ -2,7 +2,7 @@
 #https://github.com/ffnord/ffnord-puppet-gateway
 
 $VPN_NUMBER=0
-$DOMAIN=ffnord.net
+$DOMAIN=freifunk.in-kiel.de
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
@@ -13,7 +13,7 @@ $DOMAIN=ffnord.net
 #DNS Server
 echo "dns-search vpn$VPN_NUMBER.$DOMAIN" >>/etc/network/interfaces
 
-rm /etc/resolv.conf 
+rm /etc/resolv.conf
 cat >> /etc/resolv.conf << EOF
 domain ffnord
 search ffnord

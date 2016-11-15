@@ -1,14 +1,14 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-NAME="Freifunk Nord"
+NAME="Freifunk Kiel"
 OPERATOR="Max"
-CHANGELOG="https://bug.freifunk.net/projects/ffnord-admin"
-HOST_PREFIX="nord-gw"
+CHANGELOG="http://issues.freifunk.in-kiel.de/"
+HOST_PREFIX="vpn"
 SUBDOMAIN_PREFIX=vpn
-VPN_NUMBER=0
-DOMAIN="nord.freifunk.net"
-SUDOUSERNAME="maximilian"
+VPN_NUMBER=5
+DOMAIN="freifunk.in-kiel.de"
+SUDOUSERNAME="rubo77"
 
 #backborts einbauen
 echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/sources.list
@@ -38,7 +38,7 @@ echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>
 rm /etc/hostname
 echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 #benötigte Pakete installieren
-apt-get -y install sudo apt-transport-https bash-completion haveged git tcpdump mtr-tiny vim nano unp mlocate screen cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
+apt-get -y install sudo apt-transport-https bash-completion haveged git tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
 
 #REBOOT on Kernel Panic
 echo "kernel.panic = 10" >>/etc/sysctl.conf
