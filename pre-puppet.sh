@@ -6,7 +6,7 @@ OPERATOR="Max"
 CHANGELOG="http://issues.freifunk.in-kiel.de/"
 HOST_PREFIX="vpn"
 SUBDOMAIN_PREFIX=vpn
-VPN_NUMBER=5
+VPN_NUMBER=6
 DOMAIN="freifunk.in-kiel.de"
 SUDOUSERNAME="rubo77"
 

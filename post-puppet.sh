@@ -1,7 +1,7 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-$VPN_NUMBER=0
+$VPN_NUMBER=6
 $DOMAIN=freifunk.in-kiel.de
 
 #NGINX, if needed to serve the firmware for the auto-updater
@@ -24,6 +24,34 @@ nameserver 62.141.32.3
 nameserver 8.8.8.8
 
 EOF
+
+mv /etc/radvd.conf /etc/radvd.conf.bak
+cat >> /etc/radvd.conf << EOF
+# managed for interface br-ffki
+interface br-ffki
+{
+ AdvSendAdvert on;
+ AdvDefaultLifetime 0; # Here
+ IgnoreIfMissing on;
+ MaxRtrAdvInterval 200;
+
+ prefix fda1:384a:74de:4242:0000:0000:0000:0000/64
+ {
+   AdvPreferredLifetime 14400; # Here
+   AdvValidLifetime 86400; # Here
+ };
+
+ RDNSS fda1:384a:74de:4242::ff0$VPN_NUMBER
+ {
+ };
+
+ route fc00::/7  # this block
+ {
+   AdvRouteLifetime 1200;
+ };
+};
+EOF
+cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-ffki.conf
 
 # check if everything is running:
 service fastd restart
