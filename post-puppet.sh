@@ -4,6 +4,7 @@
 VPN_NUMBER=6
 DOMAIN=freifunk.in-kiel.de
 TLD=ffki
+IP6PREFIX=fda1:384a:74de:4242
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
@@ -27,21 +28,21 @@ EOF
 
 mv /etc/radvd.conf /etc/radvd.conf.bak
 cat >> /etc/radvd.conf << EOF
-# managed for interface br-ffki
-interface br-ffki
+# managed for interface br-$TLD
+interface br-$TLD
 {
  AdvSendAdvert on;
  AdvDefaultLifetime 0; # Here
  IgnoreIfMissing on;
  MaxRtrAdvInterval 200;
 
- prefix fda1:384a:74de:4242:0000:0000:0000:0000/64
+ prefix $IP6PREFIX:0000:0000:0000:0000/64
  {
    AdvPreferredLifetime 14400; # Here
    AdvValidLifetime 86400; # Here
  };
 
- RDNSS fda1:384a:74de:4242::ff0$VPN_NUMBER
+ RDNSS $IP6PREFIX::ff0$VPN_NUMBER
  {
  };
 
@@ -51,7 +52,7 @@ interface br-ffki
  };
 };
 EOF
-cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-ffki.conf
+cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-$TLD.conf
 
 # set conntrack_max higher so more connections are possible:
 /sbin/sysctl -w net.netfilter.nf_conntrack_max=1048576 && echo net.ipv4.netfilter.ip_conntrack_max = 1048576 >> /etc/sysctl.conf
