@@ -1,8 +1,8 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-$VPN_NUMBER=6
-$DOMAIN=freifunk.in-kiel.de
+VPN_NUMBER=6
+DOMAIN=freifunk.in-kiel.de
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
