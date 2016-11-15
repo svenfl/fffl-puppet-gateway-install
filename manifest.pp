@@ -1,7 +1,5 @@
-#https://ffhh.pads.ccc.de/ffki-vpn5
-
 class { 'ffnord::params':
-  router_id => "10.116.176.1",
+  router_id => "10.116.184.1",
   icvpn_as => "65525",
   wan_devices => ['eth0'],
   include_bird4 => false,
@@ -14,10 +12,10 @@ ffnord::mesh { 'mesh_ffki':
       , mesh_name => "Freifunk Kiel"
       , mesh_code => "ffki"
       , mesh_as => "65525"
-      , mesh_mac  => "de:ad:be:ef:ff:05"
-      , vpn_mac   => "de:ad:be:ff:ff:05"
-      , mesh_ipv6 => "fda1:384a:74de:4242::ff05/64"
-      , mesh_ipv4  => "10.116.176.1/17"
+      , mesh_mac  => "de:ad:be:ef:ff:06"
+      , vpn_mac   => "de:ad:be:ff:ff:06"
+      , mesh_ipv6 => "fda1:384a:74de:4242::ff06/64"
+      , mesh_ipv4  => "10.116.184.1/17"
       , range_ipv4 => "10.116.0.0/16"
       , mesh_mtu     => "1280"
       , mesh_peerings    => "/root/mesh_peerings.yaml"
@@ -26,14 +24,14 @@ ffnord::mesh { 'mesh_ffki':
       , fastd_port   => 11235
       , fastd_peers_git => 'git://git.freifunk.in-kiel.de/fastd-peer-keys.git'
 
-      , dhcp_ranges => ['10.116.176.12 10.116.176.244'
-                       ,'10.116.177.11 10.116.177.244'
-                       ,'10.116.178.11 10.116.178.244'
-                       ,'10.116.179.11 10.116.179.244'
-                       ,'10.116.180.11 10.116.180.244'
-                       ,'10.116.181.11 10.116.181.244'
-                       ,'10.116.182.11 10.116.182.244'
-                       ,'10.116.183.11 10.116.183.244']
+      , dhcp_ranges => ['10.116.184.12 10.116.184.244'
+                       ,'10.116.185.11 10.116.185.244'
+                       ,'10.116.186.11 10.116.186.244'
+                       ,'10.116.187.11 10.116.187.244'
+                       ,'10.116.188.11 10.116.188.244'
+                       ,'10.116.189.11 10.116.189.244'
+                       ,'10.116.190.11 10.116.190.244'
+                       ,'10.116.191.11 10.116.191.244']
       , dns_servers => ['10.116.136.1'
                        ,'10.116.144.1'
                        ,'10.116.152.1'
