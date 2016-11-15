@@ -3,6 +3,7 @@
 
 VPN_NUMBER=6
 DOMAIN=freifunk.in-kiel.de
+TLD=ffki
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
@@ -14,15 +15,14 @@ DOMAIN=freifunk.in-kiel.de
 echo "dns-search vpn$VPN_NUMBER.$DOMAIN" >>/etc/network/interfaces
 
 rm /etc/resolv.conf
-cat >> /etc/resolv.conf << EOF
-domain ffnord
-search ffnord
-nameserver 127.0.0.1
-nameserver 62.141.32.5
-nameserver 62.141.32.4
-nameserver 62.141.32.3
-nameserver 8.8.8.8
-
+cat >> /etc/resolv.conf <<-EOF
+  domain $TLD
+  search $TLD
+  nameserver 127.0.0.1
+  nameserver 62.141.32.5
+  nameserver 62.141.32.4
+  nameserver 62.141.32.3
+  nameserver 8.8.8.8
 EOF
 
 mv /etc/radvd.conf /etc/radvd.conf.bak
@@ -54,7 +54,7 @@ EOF
 cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-ffki.conf
 
 # set conntrack_max higher so more connections are possible:
-/sbin/sysctl -w net.netfilter.nf_conntrack_max=1048576 && echo net.ipv4.netfilter.ip_conntrack_max = 1048576 >> /etc/sysctl.conf 
+/sbin/sysctl -w net.netfilter.nf_conntrack_max=1048576 && echo net.ipv4.netfilter.ip_conntrack_max = 1048576 >> /etc/sysctl.conf
 
 # check if everything is running:
 service fastd restart
