@@ -5,6 +5,7 @@ NAME="Freifunk Kiel"
 OPERATOR="Max"
 CHANGELOG="http://issues.freifunk.in-kiel.de/"
 HOST_PREFIX="vpn"
+MESH_CODE="ffki"
 SUBDOMAIN_PREFIX=vpn
 VPN_NUMBER=6
 DOMAIN="freifunk.in-kiel.de"
@@ -54,8 +55,8 @@ cd /usr/local/bin
 wget --no-check-certificate https://raw.githubusercontent.com/Tarnatos/check-service/master/check-services
 chmod +x check-services
 chown root:root check-services
-sed -i s/=ffnord/=ffki/g /usr/local/bin/check-services
-sed -i s/=nord-gw/=ffki-vpn/g /usr/local/bin/check-services
+sed -i s/=ffnord/=$MESH_CODE/g /usr/local/bin/check-services
+sed -i s/=nord-gw/=$MESH_CODE-$HOST_PREFIX/g /usr/local/bin/check-services
 
 #zurück zu root
 cd /root
