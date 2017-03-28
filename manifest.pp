@@ -1,15 +1,25 @@
 class { 'ffnord::params':
-  router_id => "10.116.184.1",
-  icvpn_as => "65525",
-  wan_devices => ['eth0'],
+  router_id => "10.116.$$$.$$$",  # The id of this router, probably the ipv4 address
+                                  # of the mesh device of the providing community
+  icvpn_as => "65525",# The as of the providing community
+  wan_devices => ['eth0'],         # An array of devices which should be in the wan zone
+
+  wmem_default => 87380,          # Define the default socket send buffer
+  wmem_max     => 12582912,       # Define the maximum socket send buffer
+  rmem_default => 87380,          # Define the default socket recv buffer
+  rmem_max     => 12582912,       # Define the maximum socket recv buffer
+  
+  gw_control_ips => "217.70.197.1 89.27.152.1 138.201.16.163 8.8.8.8", # Define target to ping against for function check
+
+  max_backlog  => 5000,           # Define the maximum packages in buffer
   include_bird4 => false,
   #maintenance => 1,
-# debian_mirror => "http://mirror.in-kiel.de/debian/";
+  #debian_mirror => "http://repo.myloc.de/mirrors/ftp.de.debian.org/debian/";
 }
 
 # You can repeat this mesh block for every community you support
 ffnord::mesh { 'mesh_ffki':
-      , mesh_name => "Freifunk Kiel"
+        mesh_name => "Freifunk Kiel"
       , mesh_code => "ffki"
       , mesh_as => "65525"
       , mesh_mac  => "de:ad:be:ef:ff:06"
@@ -24,19 +34,9 @@ ffnord::mesh { 'mesh_ffki':
       , fastd_port   => 11235
       , fastd_peers_git => 'git://git.freifunk.in-kiel.de/fastd-peer-keys.git'
 
-      , dhcp_ranges => ['10.116.184.12 10.116.184.244'
-                       ,'10.116.185.11 10.116.185.244'
-                       ,'10.116.186.11 10.116.186.244'
-                       ,'10.116.187.11 10.116.187.244'
-                       ,'10.116.188.11 10.116.188.244'
-                       ,'10.116.189.11 10.116.189.244'
-                       ,'10.116.190.11 10.116.190.244'
-                       ,'10.116.191.11 10.116.191.244']
-      , dns_servers => ['10.116.136.1'
-                       ,'10.116.144.1'
-                       ,'10.116.152.1'
-                       ,'10.116.160.1']
-      }
+      , dhcp_ranges => ['10.116.$$$.2 10.116.$$$.254']
+      , dns_servers => ['10.116.$$$.$$$']               # should be the same as $router_id
+}
 
 class {
   'ffnord::vpn::provider::hideio':
@@ -50,9 +50,9 @@ ffnord::named::zone {
   "ffki": zone_git => "git://git.freifunk.in-kiel.de/ffki-zone.git", exclude_meta => 'kiel';
 }
 
-class { 'ffnord::alfred':
-  master => false
-}
+#class { 'ffnord::alfred':
+#  master => false
+#}
 
 #ffnord::bird6::icvpn { 'kiel0':
 #  icvpn_as           => 65525,
