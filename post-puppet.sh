@@ -13,18 +13,19 @@ IP6PREFIX=fda1:384a:74de:4242
 #sed s~"usr/share/nginx/www;"~"opt/www;"~g -i /etc/nginx/sites-enabled/default
 
 #DNS Server
-sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" /etc/network/interfaces
+# Dies Knallte bei OVH:
+# sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" /etc/network/interfaces
 
-rm /etc/resolv.conf
-cat >> /etc/resolv.conf <<-EOF
-  domain $TLD
-  search $TLD
-  nameserver 127.0.0.1
-  nameserver 62.141.32.5
-  nameserver 62.141.32.4
-  nameserver 62.141.32.3
-  nameserver 8.8.8.8
-EOF
+#rm /etc/resolv.conf
+#cat >> /etc/resolv.conf <<-EOF
+#  domain $TLD
+#  search $TLD
+#  nameserver 127.0.0.1
+#  nameserver 62.141.32.5
+#  nameserver 62.141.32.4
+#  nameserver 62.141.32.3
+#  nameserver 8.8.8.8
+#EOF
 
 mv /etc/radvd.conf /etc/radvd.conf.bak
 cat >> /etc/radvd.conf << EOF
@@ -55,7 +56,7 @@ EOF
 cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-$TLD.conf
 
 # set conntrack_max higher so more connections are possible:
-/sbin/sysctl -w net.netfilter.nf_conntrack_max=1048576 && echo net.ipv4.netfilter.ip_conntrack_max = 1048576 >> /etc/sysctl.conf
+/sbin/sysctl -w net.netfilter.nf_conntrack_max=32768 && echo net.ipv4.netfilter.ip_conntrack_max = 32768 >> /etc/sysctl.conf
 
 # increase the hop penalty
 echo "60">/sys/class/net/bat-$TLD/mesh/hop_penalty
