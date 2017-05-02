@@ -27,9 +27,6 @@ IP6PREFIX=fda1:384a:74de:4242
 #  nameserver 8.8.8.8
 #EOF
 
-# increase the hop penalty
-echo "60">/sys/class/net/bat-$TLD/mesh/hop_penalty
-
 # check if everything is running:
 service fastd restart
 service isc-dhcp-server restart
