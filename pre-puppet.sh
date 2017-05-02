@@ -55,6 +55,9 @@ puppet module install torrancew-account --version 0.1.0
 cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
 
+# symlink check-install script
+ln -s /etc/puppet/modules/ffnord/files/usr/local/bin/check-services /root/check-services
+
 # add aliases
 cat <<-EOF>> /root/.bashrc
   export LS_OPTIONS='--color=auto'
