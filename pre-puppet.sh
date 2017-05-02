@@ -72,6 +72,10 @@ EOF
 # back in /root
 cd /root
 
+echo load the ip_tables and ip_conntrack module
+modprobe ip_conntrack
+echo ip_conntrack >> /etc/modules
+
 #USER TODO:
 echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'
 echo '####################################################################################'
