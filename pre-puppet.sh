@@ -45,6 +45,9 @@ apt-get -y install sudo apt-transport-https git
 # optional pre installed to speed up the setup:
 apt-get -y install bash-completion haveged tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
 
+#not needed packages from standard OVH template
+apt-get -y remove nginx nginx-full exim mutt
+
 #puppet modules install
 apt-get -y install --no-install-recommends puppet
 puppet module install puppetlabs-stdlib --version 4.15.0 && \
