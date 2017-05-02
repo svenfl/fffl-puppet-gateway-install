@@ -38,9 +38,14 @@ hostname $HOST_PREFIX$VPN_NUMBER
 echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
 mv /etc/hostname /var/tmp/hostname-bak
 echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
-#benötigte Pakete installieren
-apt-get -y install sudo apt-transport-https bash-completion haveged git tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
 
+# install needed packages
+apt-get -y install sudo apt-transport-https git
+
+# optional pre installed to speed up the setup:
+apt-get -y install bash-completion haveged tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
+
+#TODO: solve this in puppet
 #REBOOT on Kernel Panic
 echo "kernel.panic = 10" >>/etc/sysctl.conf
 
@@ -54,28 +59,6 @@ puppet module install torrancew-account --version 0.1.0
 cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
 
-#check-services script install
-cd /usr/local/bin
-wget --no-check-certificate https://raw.githubusercontent.com/Tarnatos/check-service/master/check-services
-chmod +x check-services
-chown root:root check-services
-sed -i s/=ffnord/=$MESH_CODE/g /usr/local/bin/check-services
-sed -i s/=nord-gw/=$MESH_CODE-$HOST_PREFIX/g /usr/local/bin/check-services
-
-#zurück zu root
-cd /root
-git clone https://github.com/Freifunk-Nord/nord-watchdog
-chmod +x /root/nord-watchdog/usr/local/bin/vpn-watchdog
-#add this in crontab:
-cat > /etc/cron.d/vpn-watchdog <<EOF
-# VPN Watchdog that checks if openvpn is still running correctly
-*/5 * * * * root /root/nord-watchdog/usr/local/bin/vpn-watchdog
-EOF
-
-#USER TODO:
-#manifest.pp, $keys, mesh_peerings.yaml nach root legen
-
-
 # add aliases
 cat <<-EOF>> /root/.bashrc
   export LS_OPTIONS='--color=auto'
@@ -86,7 +69,6 @@ cat <<-EOF>> /root/.bashrc
   alias grep="grep --color=auto"
   alias ..="cd .."
 EOF
-
 
 # back in /root
 cd /root
