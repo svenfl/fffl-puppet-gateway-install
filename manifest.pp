@@ -31,9 +31,12 @@ ffnord::mesh { 'mesh_ffki':
   , range_ipv4 => "10.116.0.0/16"
   , mesh_mtu     => "1280"
   , mesh_peerings    => "/root/mesh_peerings.yaml"
+  
   , fastd_secret => "/root/fastd_secret.key"
   , fastd_port   => 11235
   , fastd_peers_git => 'git://git.freifunk.in-kiel.de/fastd-peer-keys.git'
+  , fastd_verify=> ''                               # set this to 'true' to accept all fastd keys without verification
+  
   , dhcp_ranges => ['10.116.$$$.2 10.116.$$$.254']
   , dns_servers => ['10.116.$$$.$$$']               # should be the same as $router_id
 }
