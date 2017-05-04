@@ -16,7 +16,7 @@ class { 'ffnord::params':
   #maintenance => 1,
   #debian_mirror => "http://repo.myloc.de/mirrors/ftp.de.debian.org/debian/";
   
-  $batman_version => 14,            # B.A.T.M.A.N. adv version
+  batman_version => 14,            # B.A.T.M.A.N. adv version
 }
 
 # You can repeat this mesh block for every community you support
