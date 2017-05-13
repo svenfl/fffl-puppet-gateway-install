@@ -10,12 +10,13 @@ SUBDOMAIN_PREFIX=vpn
 VPN_NUMBER=6
 DOMAIN="freifunk.in-kiel.de"
 SUDOUSERNAME="rubo77"
+TLD=ffki
 
 #backborts einbauen
-echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/sources.list
+echo "deb http://http.debian.net/debian jessie-backports main" >>/etc/apt/sources.list
 
 #sysupgrade
-apt-get update && apt-get upgrade && apt-get dist-upgrade
+apt-get update && apt-get dist-upgrade && apt-get upgrade
 
 #add users:
 useradd -U -G sudo -m $SUDOUSERNAME
@@ -34,10 +35,10 @@ echo " Happy Hacking! *" >>/etc/motd
 echo "**********************************************************" >>/etc/motd
 
 #Hostname setzen
-hostname $HOST_PREFIX$VPN_NUMBER
-echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
-mv /etc/hostname /var/tmp/hostname-bak
-echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
+#hostname $HOST_PREFIX$VPN_NUMBER
+#echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
+#mv /etc/hostname /var/tmp/hostname-bak
+#echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 
 # install needed packages
 apt-get -y install sudo apt-transport-https git
@@ -64,7 +65,7 @@ ln -s /etc/puppet/modules/ffnord/files/usr/local/bin/check-services /root/check-
 # add aliases
 cat <<-EOF>> /root/.bashrc
   export LS_OPTIONS='--color=auto'
-  eval" \`dircolors\`"
+  eval " \`dircolors\`"
   alias ls='ls \$LS_OPTIONS'
   alias ll='ls \$LS_OPTIONS -lah'
   alias l='ls \$LS_OPTIONS -lA'
