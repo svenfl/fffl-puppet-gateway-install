@@ -71,15 +71,11 @@ ffnord::named::zone {
 #}
 
 class {
-  'ffnord::rsyslog':
-}
-
-class {
-  'ffnord::etckeeper':
+  ['ffnord::etckeeper','ffnord::rsyslog','ffnord::mosh']:
 }
 
 # Useful packages
 package {
-  ['vim','tcpdump','dnsutils','realpath','screen','htop','mlocate','tig','tmux',]:
+  ['vim','tcpdump','dnsutils','realpath','screen','htop','mlocate','tig','tmux','sshguard']:
      ensure => installed;
 }
