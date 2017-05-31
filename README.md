@@ -29,15 +29,15 @@ follow instructions at the end of the script. **make sure you are in a screen se
 
 #### local exit without VPN
 
-    We do the following steps for ivp4 only, ipv6 is not forwarded locally.
-    First is the runtime change and after that instructions to change the startup
-    configuration.
+We do the following steps for ivp4 only, ipv6 is not forwarded locally.
+First is the runtime change and after that instructions to change the startup
+configuration.
 
-    Enable maintenance mode,
+Enable maintenance mode,
 
-    > maintenance on
+    maintenance on
     
-    after DHCPLEASETIME read and execute the script `localexit.sh`
+after DHCPLEASETIME read and execute the script `localexit.sh`
 
 #### 5. weitere sudo user anlegen
 
