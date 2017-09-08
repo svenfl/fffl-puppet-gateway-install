@@ -1,19 +1,16 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-NAME="Freifunk Kiel"
-OPERATOR="Max"
-CHANGELOG="http://issues.freifunk.in-kiel.de/"
-HOST_PREFIX="vpn"
-MESH_CODE="ffki"
-SUBDOMAIN_PREFIX=vpn
-VPN_NUMBER=6
-DOMAIN="freifunk.in-kiel.de"
-SUDOUSERNAME="rubo77"
-TLD=ffki
-
-#backborts einbauen
-echo "deb http://http.debian.net/debian jessie-backports main" >>/etc/apt/sources.list
+NAME="Freifunk Flensburg"
+OPERATOR="Sven Thomsen"
+CHANGELOG="https://github.com/freifunk-flensburg/website/issues"
+HOST_PREFIX="gw"
+MESH_CODE="fffl"
+SUBDOMAIN_PREFIX="gw"
+VPN_NUMBER=0
+DOMAIN="freifunk-flensburg.de"
+SUDOUSERNAME="sven"
+TLD=fffl
 
 #sysupgrade
 apt-get update && apt-get dist-upgrade && apt-get upgrade
@@ -24,7 +21,7 @@ useradd -U -G sudo -m $SUDOUSERNAME
 #MOTD setzen
 rm /etc/motd
 echo "*********************************************************" >>/etc/motd
-echo " $NAME - Gateway $SUBDOMAIN_PREFIX$VPN_NUMBER $NAME " >>/etc/motd
+echo " $NAME - Gateway $VPN_NUMBER.$SUBDOMAIN_PREFIX.$DOMAIN $NAME " >>/etc/motd
 echo " Hoster: $OPERATOR *" >>/etc/motd
 echo "*******************************************************" >>/etc/motd
 echo " " >>/etc/motd

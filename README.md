@@ -1,4 +1,4 @@
-# Install scripts for a Freifunk Kiel Gateway
+# Install scripts for a Freifunk Flensburg Gateway
 
 
 ### 1. copy this file to the root home folder:

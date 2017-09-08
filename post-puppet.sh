@@ -1,10 +1,10 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-VPN_NUMBER=6
-DOMAIN=freifunk.in-kiel.de
-TLD=ffki
-IP6PREFIX=fda1:384a:74de:4242
+VPN_NUMBER=0
+DOMAIN="freifunk-flensburg.de"
+TLD=fffl
+IP6PREFIX=fddf:bf7:10:1
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
