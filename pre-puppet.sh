@@ -12,6 +12,9 @@ DOMAIN="freifunk-flensburg.de"
 SUDOUSERNAME="sven"
 TLD=fffl
 
+#add backports
+echo "deb http://http.debian.net/debian jessie-backports main" >>/etc/apt/sources.list
+
 #sysupgrade
 apt-get update && apt-get dist-upgrade && apt-get upgrade
 
